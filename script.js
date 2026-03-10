@@ -95,3 +95,27 @@ window.addEventListener("scroll", () => {
     console.error("Live stats error:", e);
   }
 })();
+
+// Live scanner stats — Insider Scanner API
+(async function fetchInsiderStats() {
+  const elTrades = document.getElementById("insider-stats-trades");
+  const elMarkets = document.getElementById("insider-stats-markets");
+  const elScan = document.getElementById("insider-stats-scan");
+
+  try {
+    const res = await fetch("https://api.insider.chain-ops.xyz/api/stats");
+    const data = await res.json();
+
+    elTrades.textContent = (data.totalTradesScanned || 0).toLocaleString();
+    elMarkets.textContent = (data.totalMarketsTracked || 0).toLocaleString();
+
+    if (data.lastScanTime) {
+      const diff = Date.now() - new Date(data.lastScanTime).getTime();
+      if (diff < 60_000) elScan.textContent = "just now";
+      else if (diff < 3600_000) elScan.textContent = Math.floor(diff / 60_000) + "m ago";
+      else elScan.textContent = Math.floor(diff / 3600_000) + "h ago";
+    }
+  } catch (e) {
+    console.error("Insider stats error:", e);
+  }
+})();
