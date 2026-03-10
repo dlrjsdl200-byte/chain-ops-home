@@ -53,13 +53,13 @@
     </div>
     <div class="hero__stats">
       <div class="hero__stat">
-        <span class="hero__stat-value">9</span>
-        <span class="hero__stat-label">EVM chains</span>
+        <span class="hero__stat-value">3</span>
+        <span class="hero__stat-label">live products</span>
       </div>
       <div class="hero__stat-divider"></div>
       <div class="hero__stat">
         <span class="hero__stat-value">$0.001</span>
-        <span class="hero__stat-label">per API call</span>
+        <span class="hero__stat-label">from per call</span>
       </div>
       <div class="hero__stat-divider"></div>
       <div class="hero__stat">
@@ -176,18 +176,42 @@
             </div>
           </div>
         </div>
-        <div class="product-card product-card--coming">
+        <div class="product-card product-card--featured">
           <div class="product-card__header">
-            <span class="product-card__badge product-card__badge--soon">SOON</span>
+            <span class="product-card__badge">LIVE</span>
             <span class="product-card__icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
             </span>
           </div>
-          <h3 class="product-card__name">TBD</h3>
-          <p class="product-card__tagline">Next product</p>
-          <p class="product-card__desc">We're building more x402-native APIs for AI agents. Stay tuned for our next product launch.</p>
+          <h3 class="product-card__name">HyperPulse</h3>
+          <p class="product-card__tagline">Hyperliquid Intelligence API</p>
+          <p class="product-card__desc">Real-time on-chain intelligence for Hyperliquid perp DEX. Funding anomalies, OI spikes, orderbook imbalance, liquidation levels, and market snapshots.</p>
           <div class="product-card__meta">
-            <span class="product-card__chain">Coming soon</span>
+            <span class="product-card__chain">5 endpoints</span>
+            <span class="product-card__price">from $0.03</span>
+          </div>
+          <div class="product-card__actions">
+            <a href="https://hyperpulse.chain-ops.xyz" class="btn btn--primary btn--sm">Live dashboard</a>
+            <a href="https://api.hyperpulse.chain-ops.xyz/health" class="btn btn--ghost btn--sm">Try API</a>
+          </div>
+        </div>
+        <div class="product-card product-card--featured">
+          <div class="product-card__header">
+            <span class="product-card__badge">LIVE</span>
+            <span class="product-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6"/><path d="M8 11h6"/></svg>
+            </span>
+          </div>
+          <h3 class="product-card__name">Insider Scanner</h3>
+          <p class="product-card__tagline">Polymarket Insider Trading Detection</p>
+          <p class="product-card__desc">Real-time detection of insider trading on Polymarket. V3 scoring engine with 95.8% detection rate across 9 signals. Scans every 30 seconds.</p>
+          <div class="product-card__meta">
+            <span class="product-card__chain">3 endpoints</span>
+            <span class="product-card__price">from $0.005</span>
+          </div>
+          <div class="product-card__actions">
+            <a href="https://insider.chain-ops.xyz" class="btn btn--primary btn--sm">Live dashboard</a>
+            <a href="https://api.insider.chain-ops.xyz/health" class="btn btn--ghost btn--sm">Try API</a>
           </div>
         </div>
       </div>
@@ -256,6 +280,61 @@
           <a href="#docs" class="btn btn--primary btn--full">Get started</a>
         </div>
       </div>
+      <h3 style="color:#fff;margin-top:48px;margin-bottom:24px;font-size:1.2rem;">Insider Scanner</h3>
+      <div class="pricing__grid">
+        <div class="pricing-card">
+          <div class="pricing-card__header">
+            <h3 class="pricing-card__name">Alerts</h3>
+            <div class="pricing-card__price">
+              <span class="pricing-card__amount">$0.005</span>
+              <span class="pricing-card__unit">/ call</span>
+            </div>
+          </div>
+          <ul class="pricing-card__features">
+            <li class="pricing-card__feature pricing-card__feature--yes">Recent HIGH/MEDIUM alerts</li>
+            <li class="pricing-card__feature pricing-card__feature--yes">Alert counts & stats</li>
+            <li class="pricing-card__feature pricing-card__feature--yes">Filter by confidence</li>
+            <li class="pricing-card__feature pricing-card__feature--yes">Scanner metrics</li>
+          </ul>
+          <p class="pricing-card__limit">Unlimited calls</p>
+          <a href="https://api.insider.chain-ops.xyz/health" class="btn btn--ghost btn--full">Try API</a>
+        </div>
+        <div class="pricing-card pricing-card--popular">
+          <span class="pricing-card__popular-tag">Deep analysis</span>
+          <div class="pricing-card__header">
+            <h3 class="pricing-card__name">Score</h3>
+            <div class="pricing-card__price">
+              <span class="pricing-card__amount">$0.008</span>
+              <span class="pricing-card__unit">/ call</span>
+            </div>
+          </div>
+          <ul class="pricing-card__features">
+            <li class="pricing-card__feature pricing-card__feature--yes">Score any market by slug</li>
+            <li class="pricing-card__feature pricing-card__feature--yes">All wallet analysis</li>
+            <li class="pricing-card__feature pricing-card__feature--yes">9-signal breakdown</li>
+            <li class="pricing-card__feature pricing-card__feature--yes">Cluster & velocity data</li>
+          </ul>
+          <p class="pricing-card__limit">Unlimited calls</p>
+          <a href="#docs" class="btn btn--primary btn--full">Get started</a>
+        </div>
+        <div class="pricing-card">
+          <div class="pricing-card__header">
+            <h3 class="pricing-card__name">Signal</h3>
+            <div class="pricing-card__price">
+              <span class="pricing-card__amount">$0.012</span>
+              <span class="pricing-card__unit">/ call</span>
+            </div>
+          </div>
+          <ul class="pricing-card__features">
+            <li class="pricing-card__feature pricing-card__feature--yes">Top actionable signal</li>
+            <li class="pricing-card__feature pricing-card__feature--yes">Trade recommendation</li>
+            <li class="pricing-card__feature pricing-card__feature--yes">Entry price & size</li>
+            <li class="pricing-card__feature pricing-card__feature--yes">Confidence scoring</li>
+          </ul>
+          <p class="pricing-card__limit">Unlimited calls</p>
+          <a href="#docs" class="btn btn--primary btn--full">Get started</a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -318,6 +397,8 @@
           <h4 class="footer__col-title">Products</h4>
           <a href="https://mgo.chain-ops.xyz" class="footer__link">MGO Dashboard</a>
           <a href="https://api.mgo.chain-ops.xyz" class="footer__link">MGO API</a>
+          <a href="https://hyperpulse.chain-ops.xyz" class="footer__link">HyperPulse Dashboard</a>
+          <a href="https://api.hyperpulse.chain-ops.xyz" class="footer__link">HyperPulse API</a>
         </div>
         <div class="footer__col">
           <h4 class="footer__col-title">Resources</h4>
