@@ -67,7 +67,6 @@
         <span class="hero__stat-label">response time</span>
       </div>
     </div>
-
   </section>
 
   <!-- How it works -->
@@ -240,6 +239,53 @@
     </div>
   </section>
 
+  <!-- Agent Activity -->
+  <section class="activity" id="activity">
+    <div class="section-inner">
+      <p class="section-eyebrow">Agent Activity</p>
+      <h2 class="section-title">Agents in the wild</h2>
+      <p class="section-subtitle">Real-time mentions of chain-ops across the agent ecosystem.</p>
+      <div class="activity__grid">
+
+        <!-- Moltbook Mentions -->
+        <div class="activity-card">
+          <div class="activity-card__header">
+            <div class="activity-card__title-row">
+              <span class="activity-card__icon">🦞</span>
+              <h3 class="activity-card__name">Moltbook Mentions</h3>
+              <span class="activity-badge" id="moltbook-mention-count">—</span>
+            </div>
+            <span class="activity-card__status" id="moltbook-status">Scanning...</span>
+          </div>
+          <div class="activity-feed" id="moltbook-feed">
+            <div class="activity-loading">
+              <span class="activity-loading__dot"></span>
+              <span class="activity-loading__dot"></span>
+              <span class="activity-loading__dot"></span>
+            </div>
+          </div>
+          <a href="https://www.moltbook.com/search?q=chain-ops" target="_blank" rel="noopener" class="activity-card__link">View all on Moltbook →</a>
+        </div>
+
+        <!-- OpenClaw / ClawHub (coming soon) -->
+        <div class="activity-card activity-card--muted">
+          <div class="activity-card__header">
+            <div class="activity-card__title-row">
+              <span class="activity-card__icon">🔧</span>
+              <h3 class="activity-card__name">ClawHub Installs</h3>
+              <span class="activity-badge activity-badge--muted">soon</span>
+            </div>
+            <span class="activity-card__status">After ClawHub skill registration</span>
+          </div>
+          <div class="activity-feed">
+            <div class="activity-empty">Skill not yet registered on ClawHub. Once live, install counts and agent usage will appear here.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- Pricing -->
   <section class="pricing" id="pricing">
     <div class="section-inner">
@@ -387,7 +433,7 @@
               <span class="docs__link-desc">Try the demo endpoint</span>
             </div>
           </a>
-          <a href="https://github.com" class="docs__link">
+          <a href="https://github.com/dlrjsdl200-byte/x402-gas-api" class="docs__link">
             <span class="docs__link-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
             </span>
@@ -429,7 +475,7 @@
           <h4 class="footer__col-title">Resources</h4>
           <a href="https://api.mgo.chain-ops.xyz/llms.txt" class="footer__link">llms.txt</a>
           <a href="https://x402.org" class="footer__link">x402 Protocol</a>
-          <a href="https://github.com" class="footer__link">GitHub</a>
+          <a href="https://github.com/dlrjsdl200-byte/x402-gas-api" class="footer__link">GitHub</a>
         </div>
       </div>
     </div>
