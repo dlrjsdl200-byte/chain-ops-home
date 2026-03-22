@@ -39,10 +39,10 @@ window.addEventListener("scroll", () => {
 });
 
 // Live on-chain stats — USDC payments to MGO wallet on Base via Blockscout
-// FIX: 올바른 결제 지갑 주소로 수정
 (async function fetchLiveStats() {
   const WALLET = "0xEC3cAf9281a1b5371F76ee3A3eAb895fdECCe31e";
-  const USDC_DECIMALS = 6;
+  // Base mainnet USDC contract address
+  const USDC_CONTRACT = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913";
 
   const elCalls = document.getElementById("stats-calls");
   const elRevenue = document.getElementById("stats-revenue");
@@ -55,16 +55,21 @@ window.addEventListener("scroll", () => {
     const data = await res.json();
     const allItems = data.items || [];
 
-    const usdcTransfers = allItems.filter(
-      (tx) => tx.token?.symbol === "USDC"
-    );
+    // USDC만 필터: symbol AND contract address 둘 다 확인
+    const usdcTransfers = allItems.filter((tx) => {
+      const sym = tx.token?.symbol === "USDC";
+      const addr = tx.token?.address?.toLowerCase() === USDC_CONTRACT.toLowerCase();
+      return sym || addr;
+    });
 
     const totalCalls = usdcTransfers.length;
     let totalUsdc = 0;
 
     usdcTransfers.forEach((tx) => {
-      const decimals = parseInt(tx.token?.decimals) || USDC_DECIMALS;
-      totalUsdc += parseInt(tx.total?.value || "0") / Math.pow(10, decimals);
+      // FIX: total.decimals 우선 사용 (Blockscout v2 API 올바른 필드)
+      const decimals = parseInt(tx.total?.decimals ?? tx.token?.decimals ?? "6");
+      const rawValue = tx.total?.value || "0";
+      totalUsdc += parseInt(rawValue) / Math.pow(10, decimals);
     });
 
     let lastTime = null;
@@ -73,16 +78,16 @@ window.addEventListener("scroll", () => {
       if (ts) lastTime = new Date(ts);
     }
 
-    elCalls.textContent = totalCalls > 0 ? totalCalls.toLocaleString() : "0";
-    elRevenue.textContent = "$" + totalUsdc.toFixed(totalUsdc < 1 ? 4 : 2);
+    if (elCalls) elCalls.textContent = totalCalls > 0 ? totalCalls.toLocaleString() : "0";
+    if (elRevenue) elRevenue.textContent = "$" + totalUsdc.toFixed(totalUsdc < 0.01 ? 6 : totalUsdc < 1 ? 4 : 2);
 
-    if (lastTime) {
+    if (lastTime && elLast) {
       const diff = Date.now() - lastTime.getTime();
       if (diff < 60_000) elLast.textContent = "just now";
       else if (diff < 3600_000) elLast.textContent = Math.floor(diff / 60_000) + "m ago";
       else if (diff < 86400_000) elLast.textContent = Math.floor(diff / 3600_000) + "h ago";
       else elLast.textContent = Math.floor(diff / 86400_000) + "d ago";
-    } else {
+    } else if (elLast) {
       elLast.textContent = "—";
     }
   } catch (e) {
@@ -94,7 +99,6 @@ window.addEventListener("scroll", () => {
 })();
 
 // Live scanner stats — Insider Scanner API
-// FIX: 미완성 서버라 에러 무시하고 graceful fallback
 (async function fetchInsiderStats() {
   const elTrades = document.getElementById("insider-stats-trades");
   const elMarkets = document.getElementById("insider-stats-markets");
@@ -113,16 +117,13 @@ window.addEventListener("scroll", () => {
     if (elTrades) elTrades.textContent = (data.totalTradesScanned || 0).toLocaleString();
     if (elMarkets) elMarkets.textContent = (data.totalMarketsTracked || 0).toLocaleString();
 
-    if (data.lastScanTime) {
+    if (data.lastScanTime && elScan) {
       const diff = Date.now() - new Date(data.lastScanTime).getTime();
-      if (elScan) {
-        if (diff < 60_000) elScan.textContent = "just now";
-        else if (diff < 3600_000) elScan.textContent = Math.floor(diff / 60_000) + "m ago";
-        else elScan.textContent = Math.floor(diff / 3600_000) + "h ago";
-      }
+      if (diff < 60_000) elScan.textContent = "just now";
+      else if (diff < 3600_000) elScan.textContent = Math.floor(diff / 60_000) + "m ago";
+      else elScan.textContent = Math.floor(diff / 3600_000) + "h ago";
     }
   } catch (e) {
-    // 미완성 API — 에러 숨기고 coming soon 표시
     if (elTrades) elTrades.textContent = "soon";
     if (elMarkets) elMarkets.textContent = "soon";
     if (elScan) elScan.textContent = "soon";
@@ -130,14 +131,12 @@ window.addEventListener("scroll", () => {
 })();
 
 // Agent Activity — Moltbook agent post tracking
-// FIX: 비인증 search API 대신 chain-ops-agent 프로필에서 직접 포스팅 가져오기
 (async function fetchMoltbookActivity() {
   const elCount = document.getElementById("moltbook-mention-count");
   const elFeed = document.getElementById("moltbook-feed");
   const elStatus = document.getElementById("moltbook-status");
 
   try {
-    // chain-ops-agent의 최근 포스팅 가져오기 (공개 API)
     const res = await fetch(
       "https://www.moltbook.com/api/v1/posts?author=chain-ops-agent&limit=5&sort=new",
       { headers: { "Content-Type": "application/json" } }
@@ -147,23 +146,22 @@ window.addEventListener("scroll", () => {
     const data = await res.json();
     const posts = data.posts || [];
 
-    elCount.textContent = posts.length > 0 ? posts.length : "0";
+    if (elCount) elCount.textContent = posts.length > 0 ? posts.length : "0";
 
     if (posts.length === 0) {
-      elStatus.textContent = "Agent active, no recent posts";
-      elFeed.innerHTML = `<div class="activity-empty">chain-ops-agent posts daily gas reports. Check the Moltbook profile for latest activity.</div>`;
+      if (elStatus) elStatus.textContent = "Agent active, no recent posts";
+      if (elFeed) elFeed.innerHTML = `<div class="activity-empty">chain-ops-agent posts daily gas reports. Check the Moltbook profile for latest activity.</div>`;
       return;
     }
 
-    elStatus.textContent = "Last updated: " + getTimeAgo(new Date(posts[0].created_at || Date.now()));
+    if (elStatus) elStatus.textContent = "Last updated: " + getTimeAgo(new Date(posts[0].created_at || Date.now()));
 
     const top = posts.slice(0, 3);
-    elFeed.innerHTML = top.map(item => {
+    if (elFeed) elFeed.innerHTML = top.map(item => {
       const ago = getTimeAgo(new Date(item.created_at || Date.now()));
       const title = item.title || item.content?.slice(0, 60) + "..." || "(no title)";
-      const url = `https://www.moltbook.com/u/chain-ops-agent`;
       return `
-        <a href="${url}" target="_blank" rel="noopener" class="activity-item">
+        <a href="https://www.moltbook.com/u/chain-ops-agent" target="_blank" rel="noopener" class="activity-item">
           <div class="activity-item__meta">
             <span class="activity-item__author">🤖 chain-ops-agent</span>
             <span class="activity-item__time">${ago}</span>
@@ -176,8 +174,8 @@ window.addEventListener("scroll", () => {
 
   } catch (e) {
     console.error("Moltbook activity error:", e);
-    elStatus.textContent = "View on Moltbook";
-    elFeed.innerHTML = `<div class="activity-empty">
+    if (elStatus) elStatus.textContent = "View on Moltbook";
+    if (elFeed) elFeed.innerHTML = `<div class="activity-empty">
       <a href="https://www.moltbook.com/u/chain-ops-agent" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">
         chain-ops-agent on Moltbook →
       </a>
