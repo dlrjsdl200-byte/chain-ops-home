@@ -40,8 +40,8 @@ window.addEventListener("scroll", () => {
 
 // Live on-chain stats — USDC payments to MGO wallet on Base via Blockscout
 (async function fetchLiveStats() {
-  const WALLET = "0xEC3cAf9281a1b5371F76ee3A3eAb895fdECCe31e";
-  // Base mainnet USDC contract address
+  // 실제 Base 결제 수신 지갑 주소
+  const WALLET = "0x665bab4c46a6ae3f755e71793e5685bc6c47dd7a";
   const USDC_CONTRACT = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913";
 
   const elCalls = document.getElementById("stats-calls");
@@ -55,7 +55,7 @@ window.addEventListener("scroll", () => {
     const data = await res.json();
     const allItems = data.items || [];
 
-    // USDC만 필터: symbol AND contract address 둘 다 확인
+    // Base USDC contract 주소로 필터
     const usdcTransfers = allItems.filter((tx) => {
       const sym = tx.token?.symbol === "USDC";
       const addr = tx.token?.address?.toLowerCase() === USDC_CONTRACT.toLowerCase();
@@ -66,7 +66,7 @@ window.addEventListener("scroll", () => {
     let totalUsdc = 0;
 
     usdcTransfers.forEach((tx) => {
-      // FIX: total.decimals 우선 사용 (Blockscout v2 API 올바른 필드)
+      // total.decimals 우선 사용 (Blockscout v2 정확한 필드)
       const decimals = parseInt(tx.total?.decimals ?? tx.token?.decimals ?? "6");
       const rawValue = tx.total?.value || "0";
       totalUsdc += parseInt(rawValue) / Math.pow(10, decimals);
