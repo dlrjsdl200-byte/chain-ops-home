@@ -1,8 +1,278 @@
-        <!-- OpenClaw / ClawHub - LIVE -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="description" content="chain-ops — x402-native API infrastructure for AI agents. Pay-per-call microservices on Base." />
+  <title>chain-ops — Infrastructure for AI Agents</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="/" class="nav__logo">
+        <svg class="nav__logo-icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="2" width="10" height="10" rx="2.5" stroke="currentColor" stroke-width="2"/>
+          <rect x="16" y="16" width="10" height="10" rx="2.5" stroke="currentColor" stroke-width="2"/>
+          <path d="M12 7h4M7 12v4M16 21h-4M21 16v-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="nav__logo-text">chain-ops</span>
+      </a>
+      <div class="nav__links">
+        <a href="#products" class="nav__link">Products</a>
+        <a href="#pricing" class="nav__link">Pricing</a>
+        <a href="#docs" class="nav__link">Docs</a>
+      </div>
+      <a href="#products" class="nav__cta">Get started</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero__badge">
+      <span class="hero__badge-dot"></span>
+      x402 protocol
+    </div>
+    <h1 class="hero__title">
+      API infrastructure<br/>
+      <em>for AI agents</em>
+    </h1>
+    <p class="hero__desc">
+      Pay-per-call microservices built on the x402 protocol.<br/>
+      No API keys. No subscriptions. Just USDC on Base.
+    </p>
+    <div class="hero__actions">
+      <a href="#products" class="btn btn--primary">Explore products</a>
+      <a href="#docs" class="btn btn--ghost">Read the docs</a>
+    </div>
+    <div class="hero__stats">
+      <div class="hero__stat">
+        <span class="hero__stat-value">3</span>
+        <span class="hero__stat-label">live products</span>
+      </div>
+      <div class="hero__stat-divider"></div>
+      <div class="hero__stat">
+        <span class="hero__stat-value">$0.001</span>
+        <span class="hero__stat-label">from per call</span>
+      </div>
+      <div class="hero__stat-divider"></div>
+      <div class="hero__stat">
+        <span class="hero__stat-value">&lt;2s</span>
+        <span class="hero__stat-label">response time</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="how">
+    <div class="section-inner">
+      <p class="section-eyebrow">How it works</p>
+      <h2 class="section-title">Three lines of code.<br/>That's it.</h2>
+      <div class="how__terminal">
+        <div class="how__terminal-bar">
+          <span class="how__terminal-dot"></span>
+          <span class="how__terminal-dot"></span>
+          <span class="how__terminal-dot"></span>
+          <span class="how__terminal-title">terminal</span>
+        </div>
+        <div class="how__terminal-body">
+          <div class="how__code-line">
+            <span class="how__code-comment"># 1. Try for free</span>
+          </div>
+          <div class="how__code-line">
+            <span class="how__code-prompt">$</span>
+            <span class="how__code-cmd">curl</span>
+            <span class="how__code-url">api.mgo.chain-ops.xyz/gas?demo=true</span>
+          </div>
+          <div class="how__code-line how__code-line--blank"></div>
+          <div class="how__code-line">
+            <span class="how__code-comment"># 2. Pay USDC on Base</span>
+          </div>
+          <div class="how__code-line">
+            <span class="how__code-prompt">$</span>
+            <span class="how__code-cmd">curl</span>
+            <span class="how__code-url">api.mgo.chain-ops.xyz/gas?txHash=0x...&tier=basic</span>
+          </div>
+          <div class="how__code-line how__code-line--blank"></div>
+          <div class="how__code-line">
+            <span class="how__code-comment"># 3. Get data instantly</span>
+          </div>
+          <div class="how__code-line how__code-response">
+            <span class="how__code-json">{ "cheapestChain": "Base", "savingsPercent": "97.7%" }</span>
+          </div>
+        </div>
+      </div>
+      <div class="how__steps">
+        <div class="how__step">
+          <span class="how__step-num">01</span>
+          <h3 class="how__step-title">Call any endpoint</h3>
+          <p class="how__step-desc">No API key needed. Get a 402 response with pricing info, or try the free demo.</p>
+        </div>
+        <div class="how__step">
+          <span class="how__step-num">02</span>
+          <h3 class="how__step-title">Pay with USDC</h3>
+          <p class="how__step-desc">Send a microtransaction on Base. $0.001 per call. No subscriptions, no accounts.</p>
+        </div>
+        <div class="how__step">
+          <span class="how__step-num">03</span>
+          <h3 class="how__step-title">Get your data</h3>
+          <p class="how__step-desc">Include the txHash and receive data instantly. One payment, one response.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section class="products" id="products">
+    <div class="section-inner">
+      <p class="section-eyebrow">Products</p>
+      <h2 class="section-title">Built for agents that move fast</h2>
+      <div class="products__grid">
+        <div class="product-card product-card--featured">
+          <div class="product-card__header">
+            <span class="product-card__badge">LIVE</span>
+            <span class="product-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            </span>
+          </div>
+          <h3 class="product-card__name">MGO</h3>
+          <p class="product-card__tagline">Multi-chain Gas Optimizer</p>
+          <p class="product-card__desc">Compare gas prices across 9 EVM chains in real-time. Get the cheapest chain recommendation with savings calculations.</p>
+          <div class="product-card__meta">
+            <span class="product-card__chain">9 chains</span>
+            <span class="product-card__price">from $0.001</span>
+          </div>
+          <div class="product-card__actions">
+            <a href="https://mgo.chain-ops.xyz" class="btn btn--primary btn--sm">Live dashboard</a>
+            <a href="https://api.mgo.chain-ops.xyz/gas?demo=true" class="btn btn--ghost btn--sm">Try API</a>
+            <a href="https://clawhub.ai/dlrjsdl200-byte/chain-ops-mgo" target="_blank" rel="noopener" class="btn btn--ghost btn--sm">ClawHub</a>
+          </div>
+          <div class="live-stats" id="live-stats">
+            <div class="live-stats__header">
+              <span class="live-stats__dot"></span>
+              <span class="live-stats__label">On-chain stats</span>
+            </div>
+            <div class="live-stats__grid">
+              <div class="live-stats__item">
+                <span class="live-stats__value" id="stats-calls">—</span>
+                <span class="live-stats__desc">calls</span>
+              </div>
+              <div class="live-stats__divider"></div>
+              <div class="live-stats__item">
+                <span class="live-stats__value" id="stats-revenue">—</span>
+                <span class="live-stats__desc">revenue</span>
+              </div>
+              <div class="live-stats__divider"></div>
+              <div class="live-stats__item">
+                <span class="live-stats__value" id="stats-last">—</span>
+                <span class="live-stats__desc">last payment</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="product-card product-card--featured">
+          <div class="product-card__header">
+            <span class="product-card__badge">LIVE</span>
+            <span class="product-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </span>
+          </div>
+          <h3 class="product-card__name">HyperPulse</h3>
+          <p class="product-card__tagline">Hyperliquid Intelligence API</p>
+          <p class="product-card__desc">Real-time on-chain intelligence for Hyperliquid perp DEX. Funding anomalies, OI spikes, orderbook imbalance, liquidation levels, and market snapshots.</p>
+          <div class="product-card__meta">
+            <span class="product-card__chain">5 endpoints</span>
+            <span class="product-card__price">from $0.03</span>
+          </div>
+          <div class="product-card__actions">
+            <a href="https://hyperpulse.chain-ops.xyz" class="btn btn--primary btn--sm">Live dashboard</a>
+            <a href="https://api.hyperpulse.chain-ops.xyz/health" class="btn btn--ghost btn--sm">Try API</a>
+          </div>
+        </div>
+        <div class="product-card product-card--featured">
+          <div class="product-card__header">
+            <span class="product-card__badge">LIVE</span>
+            <span class="product-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6"/><path d="M8 11h6"/></svg>
+            </span>
+          </div>
+          <h3 class="product-card__name">Insider Scanner</h3>
+          <p class="product-card__tagline">Polymarket Insider Trading Detection</p>
+          <p class="product-card__desc">Real-time detection of insider trading on Polymarket. V3 scoring engine with 95.8% detection rate across 9 signals. Scans every 30 seconds.</p>
+          <div class="product-card__meta">
+            <span class="product-card__chain">3 endpoints</span>
+            <span class="product-card__price">from $0.005</span>
+          </div>
+          <div class="product-card__actions">
+            <a href="https://insider.chain-ops.xyz" class="btn btn--primary btn--sm">Live dashboard</a>
+            <a href="https://api.insider.chain-ops.xyz/health" class="btn btn--ghost btn--sm">Try API</a>
+          </div>
+          <div class="live-stats" id="insider-live-stats">
+            <div class="live-stats__header">
+              <span class="live-stats__dot"></span>
+              <span class="live-stats__label">Scanner stats</span>
+            </div>
+            <div class="live-stats__grid">
+              <div class="live-stats__item">
+                <span class="live-stats__value" id="insider-stats-trades">—</span>
+                <span class="live-stats__desc">trades scanned</span>
+              </div>
+              <div class="live-stats__divider"></div>
+              <div class="live-stats__item">
+                <span class="live-stats__value" id="insider-stats-markets">—</span>
+                <span class="live-stats__desc">markets tracked</span>
+              </div>
+              <div class="live-stats__divider"></div>
+              <div class="live-stats__item">
+                <span class="live-stats__value" id="insider-stats-scan">—</span>
+                <span class="live-stats__desc">last scan</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Agent Activity -->
+  <section class="activity" id="activity">
+    <div class="section-inner">
+      <p class="section-eyebrow">Agent Activity</p>
+      <h2 class="section-title">Agents in the wild</h2>
+      <p class="section-subtitle">Real-time mentions of chain-ops across the agent ecosystem.</p>
+      <div class="activity__grid">
+
+        <!-- Moltbook Mentions -->
         <div class="activity-card">
           <div class="activity-card__header">
             <div class="activity-card__title-row">
               <span class="activity-card__icon">🦞</span>
+              <h3 class="activity-card__name">Moltbook Mentions</h3>
+              <span class="activity-badge" id="moltbook-mention-count">—</span>
+            </div>
+            <span class="activity-card__status" id="moltbook-status">Scanning...</span>
+          </div>
+          <div class="activity-feed" id="moltbook-feed">
+            <div class="activity-loading">
+              <span class="activity-loading__dot"></span>
+              <span class="activity-loading__dot"></span>
+              <span class="activity-loading__dot"></span>
+            </div>
+          </div>
+          <a href="https://www.moltbook.com/u/chain-ops-agent" target="_blank" rel="noopener" class="activity-card__link">View chain-ops-agent on Moltbook →</a>
+        </div>
+
+        <!-- ClawHub - LIVE -->
+        <div class="activity-card">
+          <div class="activity-card__header">
+            <div class="activity-card__title-row">
+              <span class="activity-card__icon">🔧</span>
               <h3 class="activity-card__name">ClawHub Skill</h3>
               <span class="activity-badge">LIVE</span>
             </div>
@@ -20,3 +290,210 @@
           </div>
           <a href="https://clawhub.ai/dlrjsdl200-byte/chain-ops-mgo" target="_blank" rel="noopener" class="activity-card__link">View on ClawHub →</a>
         </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="pricing" id="pricing">
+    <div class="section-inner">
+      <p class="section-eyebrow">Pricing</p>
+      <h2 class="section-title">Pay only for what you use</h2>
+      <p class="section-subtitle">No subscriptions. No API keys. Just microtransactions on Base.</p>
+      <h3 style="color:#1a1a1a;margin-top:32px;margin-bottom:24px;font-size:1.2rem;">MGO — Multi-chain Gas Optimizer</h3>
+      <div class="pricing__grid">
+        <div class="pricing-card">
+          <div class="pricing-card__header">
+            <h3 class="pricing-card__name">Demo</h3>
+            <div class="pricing-card__price">
+              <span class="pricing-card__amount">Free</span>
+            </div>
+          </div>
+          <ul class="pricing-card__features">
+            <li class="pricing-card__feature pricing-card__feature--yes">4 chains gas prices</li>
+            <li class="pricing-card__feature pricing-card__feature--yes">Raw cost estimates</li>
+            <li class="pricing-card__feature pricing-card__feature--no">Recommendations</li>
+            <li class="pricing-card__feature pricing-card__feature--no">Savings calculations</li>
+            <li class="pricing-card__feature pricing-card__feature--no">Premium chains</li>
+          </ul>
+          <p class="pricing-card__limit">10 calls/hr per IP</p>
+          <a href="https://api.mgo.chain-ops.xyz/gas?demo=true" class="btn btn--ghost btn--full">Try free</a>
+        </div>
+        <div class="pricing-card pricing-card--popular">
+          <span class="pricing-card__popular-tag">Most popular</span>
+          <div class="pricing-card__header">
+            <h3 class="pricing-card__name">Basic</h3>
+            <div class="pricing-card__price">
+              <span class="pricing-card__amount">$0.001</span>
+              <span class="pricing-card__unit">/ call</span>
+            </div>
+          </div>
+          <ul class="pricing-card__features">
+            <li class="pricing-card__feature pricing-card__feature--yes">4 chains gas prices</li>
+            <li class="pricing-card__feature pricing-card__feature--yes">USDC cost estimates</li>
+            <li class="pricing-card__feature pricing-card__feature--yes">Cheapest chain recommendation</li>
+            <li class="pricing-card__feature pricing-card__feature--yes">Savings % calculation</li>
+            <li class="pricing-card__feature pricing-card__feature--no">Premium chains</li>
+          </ul>
+          <p class="pricing-card__limit">Unlimited calls</p>
+          <a href="#docs" class="btn btn--primary btn--full">Get started</a>
+        </div>
+        <div class="pricing-card">
+          <div class="pricing-card__header">
+            <h3 class="pricing-card__name">Premium</h3>
+            <div class="pricing-card__price">
+              <span class="pricing-card__amount">$0.002</span>
+              <span class="pricing-card__unit">/ call</span>
+            </div>
+          </div>
+          <ul class="pricing-card__features">
+            <li class="pricing-card__feature pricing-card__feature--yes">9 chains gas prices</li>
+            <li class="pricing-card__feature pricing-card__feature--yes">USDC cost estimates</li>
+            <li class="pricing-card__feature pricing-card__feature--yes">Cheapest chain recommendation</li>
+            <li class="pricing-card__feature pricing-card__feature--yes">Savings % calculation</li>
+            <li class="pricing-card__feature pricing-card__feature--yes">BNB, Polygon, Avalanche, zkSync, Hyperliquid</li>
+          </ul>
+          <p class="pricing-card__limit">Unlimited calls</p>
+          <a href="#docs" class="btn btn--primary btn--full">Get started</a>
+        </div>
+      </div>
+      <h3 style="color:#1a1a1a;margin-top:48px;margin-bottom:24px;font-size:1.2rem;">Insider Scanner — Polymarket Insider Detection</h3>
+      <div class="pricing__grid">
+        <div class="pricing-card">
+          <div class="pricing-card__header">
+            <h3 class="pricing-card__name">Alerts</h3>
+            <div class="pricing-card__price">
+              <span class="pricing-card__amount">$0.005</span>
+              <span class="pricing-card__unit">/ call</span>
+            </div>
+          </div>
+          <ul class="pricing-card__features">
+            <li class="pricing-card__feature pricing-card__feature--yes">Recent HIGH/MEDIUM alerts</li>
+            <li class="pricing-card__feature pricing-card__feature--yes">Alert counts & stats</li>
+            <li class="pricing-card__feature pricing-card__feature--yes">Filter by confidence</li>
+            <li class="pricing-card__feature pricing-card__feature--yes">Scanner metrics</li>
+          </ul>
+          <p class="pricing-card__limit">Unlimited calls</p>
+          <a href="https://api.insider.chain-ops.xyz/health" class="btn btn--ghost btn--full">Try API</a>
+        </div>
+        <div class="pricing-card pricing-card--popular">
+          <span class="pricing-card__popular-tag">Deep analysis</span>
+          <div class="pricing-card__header">
+            <h3 class="pricing-card__name">Score</h3>
+            <div class="pricing-card__price">
+              <span class="pricing-card__amount">$0.008</span>
+              <span class="pricing-card__unit">/ call</span>
+            </div>
+          </div>
+          <ul class="pricing-card__features">
+            <li class="pricing-card__feature pricing-card__feature--yes">Score any market by slug</li>
+            <li class="pricing-card__feature pricing-card__feature--yes">All wallet analysis</li>
+            <li class="pricing-card__feature pricing-card__feature--yes">9-signal breakdown</li>
+            <li class="pricing-card__feature pricing-card__feature--yes">Cluster & velocity data</li>
+          </ul>
+          <p class="pricing-card__limit">Unlimited calls</p>
+          <a href="#docs" class="btn btn--primary btn--full">Get started</a>
+        </div>
+        <div class="pricing-card">
+          <div class="pricing-card__header">
+            <h3 class="pricing-card__name">Signal</h3>
+            <div class="pricing-card__price">
+              <span class="pricing-card__amount">$0.012</span>
+              <span class="pricing-card__unit">/ call</span>
+            </div>
+          </div>
+          <ul class="pricing-card__features">
+            <li class="pricing-card__feature pricing-card__feature--yes">Top actionable signal</li>
+            <li class="pricing-card__feature pricing-card__feature--yes">Trade recommendation</li>
+            <li class="pricing-card__feature pricing-card__feature--yes">Entry price & size</li>
+            <li class="pricing-card__feature pricing-card__feature--yes">Confidence scoring</li>
+          </ul>
+          <p class="pricing-card__limit">Unlimited calls</p>
+          <a href="#docs" class="btn btn--primary btn--full">Get started</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Docs / CTA -->
+  <section class="docs" id="docs">
+    <div class="section-inner">
+      <div class="docs__card">
+        <p class="section-eyebrow">For developers</p>
+        <h2 class="docs__title">Start building in minutes</h2>
+        <p class="docs__desc">Read our llms.txt for AI agent integration, or explore the API directly.</p>
+        <div class="docs__links">
+          <a href="https://api.mgo.chain-ops.xyz/llms.txt" class="docs__link">
+            <span class="docs__link-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            </span>
+            <div>
+              <span class="docs__link-title">llms.txt</span>
+              <span class="docs__link-desc">AI-readable API docs</span>
+            </div>
+          </a>
+          <a href="https://api.mgo.chain-ops.xyz/gas?demo=true" class="docs__link">
+            <span class="docs__link-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </span>
+            <div>
+              <span class="docs__link-title">API Playground</span>
+              <span class="docs__link-desc">Try the demo endpoint</span>
+            </div>
+          </a>
+          <a href="https://github.com/dlrjsdl200-byte/x402-gas-api" class="docs__link">
+            <span class="docs__link-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+            </span>
+            <div>
+              <span class="docs__link-title">GitHub</span>
+              <span class="docs__link-desc">View source code</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__left">
+        <a href="/" class="nav__logo">
+          <svg class="nav__logo-icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="2" width="10" height="10" rx="2.5" stroke="currentColor" stroke-width="2"/>
+            <rect x="16" y="16" width="10" height="10" rx="2.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M12 7h4M7 12v4M16 21h-4M21 16v-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <span class="nav__logo-text">chain-ops</span>
+        </a>
+        <p class="footer__tagline">x402-native API infrastructure for AI agents.</p>
+      </div>
+      <div class="footer__right">
+        <div class="footer__col">
+          <h4 class="footer__col-title">Products</h4>
+          <a href="https://mgo.chain-ops.xyz" class="footer__link">MGO Dashboard</a>
+          <a href="https://api.mgo.chain-ops.xyz" class="footer__link">MGO API</a>
+          <a href="https://hyperpulse.chain-ops.xyz" class="footer__link">HyperPulse Dashboard</a>
+          <a href="https://api.hyperpulse.chain-ops.xyz" class="footer__link">HyperPulse API</a>
+          <a href="https://insider.chain-ops.xyz" class="footer__link">Insider Scanner</a>
+          <a href="https://api.insider.chain-ops.xyz" class="footer__link">Insider API</a>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__col-title">Resources</h4>
+          <a href="https://api.mgo.chain-ops.xyz/llms.txt" class="footer__link">llms.txt</a>
+          <a href="https://clawhub.ai/dlrjsdl200-byte/chain-ops-mgo" class="footer__link">ClawHub Skill</a>
+          <a href="https://x402.org" class="footer__link">x402 Protocol</a>
+          <a href="https://github.com/dlrjsdl200-byte/x402-gas-api" class="footer__link">GitHub</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>&copy; 2026 chain-ops. Built on Base.</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
