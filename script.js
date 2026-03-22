@@ -39,8 +39,9 @@ window.addEventListener("scroll", () => {
 });
 
 // Live on-chain stats — USDC payments to MGO wallet on Base via Blockscout
+// FIX: 올바른 결제 지갑 주소로 수정
 (async function fetchLiveStats() {
-  const WALLET = "0x665bab4c46a6ae3f755e71793e5685bc6c47dd7a";
+  const WALLET = "0xEC3cAf9281a1b5371F76ee3A3eAb895fdECCe31e";
   const USDC_DECIMALS = 6;
 
   const elCalls = document.getElementById("stats-calls");
@@ -48,12 +49,11 @@ window.addEventListener("scroll", () => {
   const elLast = document.getElementById("stats-last");
 
   try {
-    let allItems = [];
-    let url = `https://base.blockscout.com/api/v2/addresses/${WALLET}/token-transfers?type=ERC-20&filter=to`;
-
+    const url = `https://base.blockscout.com/api/v2/addresses/${WALLET}/token-transfers?type=ERC-20&filter=to`;
     const res = await fetch(url);
+    if (!res.ok) throw new Error(`Blockscout ${res.status}`);
     const data = await res.json();
-    allItems = data.items || [];
+    const allItems = data.items || [];
 
     const usdcTransfers = allItems.filter(
       (tx) => tx.token?.symbol === "USDC"
@@ -73,7 +73,7 @@ window.addEventListener("scroll", () => {
       if (ts) lastTime = new Date(ts);
     }
 
-    elCalls.textContent = totalCalls.toLocaleString();
+    elCalls.textContent = totalCalls > 0 ? totalCalls.toLocaleString() : "0";
     elRevenue.textContent = "$" + totalUsdc.toFixed(totalUsdc < 1 ? 4 : 2);
 
     if (lastTime) {
@@ -87,104 +87,102 @@ window.addEventListener("scroll", () => {
     }
   } catch (e) {
     console.error("Live stats error:", e);
+    if (elCalls) elCalls.textContent = "—";
+    if (elRevenue) elRevenue.textContent = "—";
+    if (elLast) elLast.textContent = "—";
   }
 })();
 
 // Live scanner stats — Insider Scanner API
+// FIX: 미완성 서버라 에러 무시하고 graceful fallback
 (async function fetchInsiderStats() {
   const elTrades = document.getElementById("insider-stats-trades");
   const elMarkets = document.getElementById("insider-stats-markets");
   const elScan = document.getElementById("insider-stats-scan");
 
   try {
-    const res = await fetch("https://api.insider.chain-ops.xyz/api/stats");
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 3000);
+    const res = await fetch("https://api.insider.chain-ops.xyz/api/stats", {
+      signal: controller.signal
+    });
+    clearTimeout(timeout);
+    if (!res.ok) throw new Error(`Insider API ${res.status}`);
     const data = await res.json();
 
-    elTrades.textContent = (data.totalTradesScanned || 0).toLocaleString();
-    elMarkets.textContent = (data.totalMarketsTracked || 0).toLocaleString();
+    if (elTrades) elTrades.textContent = (data.totalTradesScanned || 0).toLocaleString();
+    if (elMarkets) elMarkets.textContent = (data.totalMarketsTracked || 0).toLocaleString();
 
     if (data.lastScanTime) {
       const diff = Date.now() - new Date(data.lastScanTime).getTime();
-      if (diff < 60_000) elScan.textContent = "just now";
-      else if (diff < 3600_000) elScan.textContent = Math.floor(diff / 60_000) + "m ago";
-      else elScan.textContent = Math.floor(diff / 3600_000) + "h ago";
+      if (elScan) {
+        if (diff < 60_000) elScan.textContent = "just now";
+        else if (diff < 3600_000) elScan.textContent = Math.floor(diff / 60_000) + "m ago";
+        else elScan.textContent = Math.floor(diff / 3600_000) + "h ago";
+      }
     }
   } catch (e) {
-    console.error("Insider stats error:", e);
+    // 미완성 API — 에러 숨기고 coming soon 표시
+    if (elTrades) elTrades.textContent = "soon";
+    if (elMarkets) elMarkets.textContent = "soon";
+    if (elScan) elScan.textContent = "soon";
   }
 })();
 
-// Agent Activity — Moltbook mention tracking
+// Agent Activity — Moltbook agent post tracking
+// FIX: 비인증 search API 대신 chain-ops-agent 프로필에서 직접 포스팅 가져오기
 (async function fetchMoltbookActivity() {
   const elCount = document.getElementById("moltbook-mention-count");
   const elFeed = document.getElementById("moltbook-feed");
   const elStatus = document.getElementById("moltbook-status");
 
-  const KEYWORDS = ["chain-ops", "mgo gas", "hyperpulse", "insider scanner"];
-
   try {
-    // Search Moltbook public API for mentions (no auth needed for basic search)
-    const results = [];
+    // chain-ops-agent의 최근 포스팅 가져오기 (공개 API)
+    const res = await fetch(
+      "https://www.moltbook.com/api/v1/posts?author=chain-ops-agent&limit=5&sort=new",
+      { headers: { "Content-Type": "application/json" } }
+    );
 
-    for (const kw of KEYWORDS) {
-      const res = await fetch(
-        `https://www.moltbook.com/api/v1/search?q=${encodeURIComponent(kw)}&limit=5`,
-        { headers: { "Content-Type": "application/json" } }
-      );
-      if (!res.ok) continue;
-      const data = await res.json();
-      if (data.results && data.results.length > 0) {
-        results.push(...data.results.map(r => ({ ...r, keyword: kw })));
-      }
-    }
+    if (!res.ok) throw new Error(`Moltbook API ${res.status}`);
+    const data = await res.json();
+    const posts = data.posts || [];
 
-    // Dedupe by id
-    const seen = new Set();
-    const unique = results.filter(r => {
-      if (seen.has(r.id)) return false;
-      seen.add(r.id);
-      return true;
-    });
+    elCount.textContent = posts.length > 0 ? posts.length : "0";
 
-    // Sort by created_at desc
-    unique.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-
-    elCount.textContent = unique.length > 0 ? unique.length : "0";
-
-    if (unique.length === 0) {
-      elStatus.textContent = "No mentions yet";
-      elFeed.innerHTML = `<div class="activity-empty">Agents haven't discovered chain-ops yet. Once they do, mentions will appear here.</div>`;
+    if (posts.length === 0) {
+      elStatus.textContent = "Agent active, no recent posts";
+      elFeed.innerHTML = `<div class="activity-empty">chain-ops-agent posts daily gas reports. Check the Moltbook profile for latest activity.</div>`;
       return;
     }
 
-    // Show last checked time
-    elStatus.textContent = "Last checked: just now";
+    elStatus.textContent = "Last updated: " + getTimeAgo(new Date(posts[0].created_at || Date.now()));
 
-    // Render top 3 mentions
-    const top = unique.slice(0, 3);
+    const top = posts.slice(0, 3);
     elFeed.innerHTML = top.map(item => {
-      const ago = getTimeAgo(new Date(item.created_at));
+      const ago = getTimeAgo(new Date(item.created_at || Date.now()));
       const title = item.title || item.content?.slice(0, 60) + "..." || "(no title)";
-      const author = item.author?.name || "unknown agent";
-      const url = item.type === "post"
-        ? `https://www.moltbook.com/m/${item.submolt?.name || "general"}/post/${item.post_id || item.id}`
-        : `https://www.moltbook.com/m/${item.submolt?.name || "general"}/post/${item.post_id}`;
+      const url = `https://www.moltbook.com/u/chain-ops-agent`;
       return `
         <a href="${url}" target="_blank" rel="noopener" class="activity-item">
           <div class="activity-item__meta">
-            <span class="activity-item__author">🤖 ${author}</span>
+            <span class="activity-item__author">🤖 chain-ops-agent</span>
             <span class="activity-item__time">${ago}</span>
           </div>
           <div class="activity-item__title">${title}</div>
-          <div class="activity-item__tag">mentioned: ${item.keyword}</div>
+          <div class="activity-item__tag">auto-generated · gas intelligence</div>
         </a>
       `;
     }).join("");
 
   } catch (e) {
     console.error("Moltbook activity error:", e);
-    elStatus.textContent = "Could not reach Moltbook";
-    elFeed.innerHTML = `<div class="activity-empty">Moltbook API unreachable. Will retry on next load.</div>`;
+    elStatus.textContent = "View on Moltbook";
+    elFeed.innerHTML = `<div class="activity-empty">
+      <a href="https://www.moltbook.com/u/chain-ops-agent" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">
+        chain-ops-agent on Moltbook →
+      </a>
+    </div>`;
+    if (elCount) elCount.textContent = "—";
   }
 
   function getTimeAgo(date) {
