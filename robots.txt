@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://chain-ops.xyz/sitemap.xml
