@@ -12,6 +12,51 @@
   <meta property="og:url" content="https://chain-ops.xyz" />
   <meta name="twitter:card" content="summary_large_image" />
   <title>chain-ops — Build AI agents that pay</title>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://chain-ops.xyz/#org",
+        "name": "chain-ops",
+        "url": "https://chain-ops.xyz",
+        "description": "Build AI agents that pay. One-line x402 + ERC-8004 SDK and pay-per-call on-chain data APIs. USDC on Base.",
+        "email": "dlrjsdl200@naver.com",
+        "sameAs": [
+          "https://github.com/dlrjsdl200-byte",
+          "https://www.npmjs.com/package/@chain-ops/agent-sdk"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://chain-ops.xyz/#website",
+        "url": "https://chain-ops.xyz",
+        "name": "chain-ops",
+        "publisher": { "@id": "https://chain-ops.xyz/#org" }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "@chain-ops/agent-sdk",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Node.js 18+",
+        "description": "One-line SDK for x402 (V1 + V2) payments with ERC-8004 agent identity. Pay, prove, reputation — in a single call.",
+        "url": "https://www.npmjs.com/package/@chain-ops/agent-sdk",
+        "license": "https://opensource.org/licenses/MIT",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@id": "https://chain-ops.xyz/#org" }
+      },
+      {
+        "@type": "WebAPI",
+        "name": "MGO — Multi-chain Gas Optimizer",
+        "description": "Compare real-time gas prices across 9 EVM chains via x402 pay-per-call. $0.001 USDC per basic call, $0.002 premium. No API key needed.",
+        "documentation": "https://api.mgo.chain-ops.xyz/llms.txt",
+        "url": "https://api.mgo.chain-ops.xyz",
+        "provider": { "@id": "https://chain-ops.xyz/#org" }
+      }
+    ]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />

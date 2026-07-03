@@ -1,0 +1,39 @@
+# chain-ops
+
+> Build AI agents that pay. chain-ops ships @chain-ops/agent-sdk — a one-line SDK that combines x402 payments (V1 + V2) with ERC-8004 on-chain agent identity — plus live pay-per-call APIs priced in USDC on Base. No API keys, no subscriptions.
+
+chain-ops bridges two protocols that don't talk to each other: x402 gives AI agents a payment rail (HTTP 402 Payment Required), and ERC-8004 gives them an on-chain identity and reputation. The SDK wires them together so `await agent.pay(url)` handles identity attachment, EIP-712 signing, trust checks, and reputation updates in a single call.
+
+## SDK
+
+- [npm: @chain-ops/agent-sdk](https://www.npmjs.com/package/@chain-ops/agent-sdk): One-line x402 + ERC-8004 SDK for Node 18+. MIT licensed.
+- [GitHub](https://github.com/dlrjsdl200-byte): Source code and issues.
+
+Quickstart:
+
+```
+npm install @chain-ops/agent-sdk viem
+```
+
+```ts
+import { createAgent } from "@chain-ops/agent-sdk";
+const agent = createAgent({ account: process.env.PRIVATE_KEY, network: "base" });
+await agent.registerAgent({ name: "my-agent", tags: ["gas", "evm"] }); // one-time
+const { body } = await agent.pay("https://api.mgo.chain-ops.xyz/gas/basic");
+```
+
+## APIs (pay-per-call via x402, USDC on Base)
+
+- [MGO — Multi-chain Gas Optimizer](https://api.mgo.chain-ops.xyz/llms.txt): Compare real-time gas prices across 9 EVM chains and get the cheapest-chain recommendation. $0.001/call basic (ETH, Base, Arbitrum, Optimism), $0.002/call premium (adds BNB, Polygon, Avalanche, zkSync, Hyperliquid). Free demo endpoint: https://api.mgo.chain-ops.xyz/gas/demo
+- [npm: chain-ops-mgo](https://www.npmjs.com/package/chain-ops-mgo): MGO client package with auto-pay via @chain-ops/agent-sdk.
+- MCP endpoint: https://x402-gas-api.vercel.app/mcp (Streamable HTTP, registered on Smithery)
+
+## Protocols
+
+- [x402](https://x402.org): HTTP-native micropayment protocol (402 Payment Required).
+- [ERC-8004](https://github.com/ethereum/ERCs/blob/master/ERCS/erc-8004.md): Trustless Agents — on-chain agent identity and reputation.
+
+## Optional
+
+- In the pipeline: HyperPulse (Hyperliquid intelligence) and Insider Scanner (Polymarket insider detection), both in private development.
+- Contact: dlrjsdl200@naver.com
