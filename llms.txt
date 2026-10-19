@@ -1,8 +1,8 @@
 # chain-ops
 
-> Build AI agents that pay. chain-ops ships @chain-ops/agent-sdk — a one-line SDK that combines x402 payments (V1 + V2) with ERC-8004 on-chain agent identity — plus live pay-per-call APIs priced in USDC on Base. No API keys, no subscriptions.
+> chain-ops ships pay-per-call on-chain data APIs for AI agents (x402, USDC on Base, no API keys) and @chain-ops/agent-sdk, an x402 V1 + V2 client SDK with ERC-8004 agent identity registration.
 
-chain-ops bridges two protocols that don't talk to each other: x402 gives AI agents a payment rail (HTTP 402 Payment Required), and ERC-8004 gives them an on-chain identity and reputation. The SDK wires them together so `await agent.pay(url)` handles identity attachment, EIP-712 signing, trust checks, and reputation updates in a single call.
+chain-ops bridges two protocols that don't talk to each other: x402 gives AI agents a payment rail (HTTP 402 Payment Required), and ERC-8004 gives them an on-chain identity and reputation. The SDK handles the 402 flow (parse requirements, sign the EIP-3009 USDC authorization, retry) in `await agent.pay(url)`, and exposes ERC-8004 `registerAgent()` and `getTrustScore()`. Automatic identity attachment and reputation updates are on the roadmap.
 
 ## SDK
 
@@ -26,7 +26,9 @@ const { body } = await agent.pay("https://api.mgo.chain-ops.xyz/gas/basic");
 
 - [MGO — Multi-chain Gas Optimizer](https://api.mgo.chain-ops.xyz/llms.txt): Compare real-time gas prices across 9 EVM chains and get the cheapest-chain recommendation. $0.001/call basic (ETH, Base, Arbitrum, Optimism), $0.002/call premium (adds BNB, Polygon, Avalanche, zkSync, Hyperliquid). Free demo endpoint: https://api.mgo.chain-ops.xyz/gas/demo
 - [npm: chain-ops-mgo](https://www.npmjs.com/package/chain-ops-mgo): MGO client package with auto-pay via @chain-ops/agent-sdk.
-- MCP endpoint: https://x402-gas-api.vercel.app/mcp (Streamable HTTP, registered on Smithery)
+- MCP endpoint: https://api.mgo.chain-ops.xyz/mcp (Streamable HTTP; official MCP Registry name xyz.chain-ops/mgo). Tools: get_gas_demo, get_cheapest_chain (free), get_gas_basic, get_gas_premium (x402).
+- Free token prices: https://api.mgo.chain-ops.xyz/prices
+- OpenAPI: https://api.mgo.chain-ops.xyz/openapi.json
 
 ## Protocols
 
@@ -35,5 +37,7 @@ const { body } = await agent.pay("https://api.mgo.chain-ops.xyz/gas/basic");
 
 ## Optional
 
-- In the pipeline: HyperPulse (Hyperliquid intelligence) and Insider Scanner (Polymarket insider detection), both in private development.
+- [x402Hub](https://x402.chain-ops.xyz): Trust board and discovery for x402 API and MCP services (live).
+- [HyperPulse](https://hyperpulse-web.vercel.app): Hyperliquid perp intelligence dashboard (live).
+- Insider Scanner (Polymarket insider detection): paused.
 - Contact: dlrjsdl200@naver.com

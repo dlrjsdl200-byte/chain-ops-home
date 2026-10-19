@@ -7,12 +7,19 @@
   <meta name="theme-color" content="#0a0a0a" />
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <meta name="description" content="chain-ops — Build AI agents that pay. One-line x402 + ERC-8004 SDK for autonomous agents. USDC on Base." />
+  <meta name="description" content="chain-ops — pay-per-call on-chain data for AI agents. MGO compares live gas across 9 EVM chains from $0.001 per call via x402. USDC on Base, no API key. Plus @chain-ops/agent-sdk for x402 V1+V2 payments." />
   <meta property="og:title" content="chain-ops — Build AI agents that pay" />
-  <meta property="og:description" content="One-line x402 payments with ERC-8004 identity. USDC on Base." />
+  <meta property="og:description" content="Pay-per-call on-chain data for AI agents. MGO: live gas comparison across 9 EVM chains from $0.001 per call. USDC on Base, no API key." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://chain-ops.xyz" />
+  <meta property="og:url" content="https://chain-ops.xyz/" />
+  <meta property="og:image" content="https://chain-ops.xyz/og.png" />
+  <meta property="og:image:width" content="2400" />
+  <meta property="og:image:height" content="1260" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="chain-ops — Build AI agents that pay" />
+  <meta name="twitter:description" content="Pay-per-call on-chain data for AI agents. MGO: live gas comparison across 9 EVM chains from $0.001 per call. USDC on Base, no API key." />
+  <meta name="twitter:image" content="https://chain-ops.xyz/og.png" />
+  <link rel="canonical" href="https://chain-ops.xyz/" />
   <title>chain-ops — Build AI agents that pay</title>
   <script type="application/ld+json">
   {
@@ -23,7 +30,7 @@
         "@id": "https://chain-ops.xyz/#org",
         "name": "chain-ops",
         "url": "https://chain-ops.xyz",
-        "description": "Build AI agents that pay. One-line x402 + ERC-8004 SDK and pay-per-call on-chain data APIs. USDC on Base.",
+        "description": "Pay-per-call on-chain data APIs for AI agents (x402, USDC on Base) and an x402 V1+V2 client SDK with ERC-8004 identity.",
         "email": "dlrjsdl200@naver.com",
         "sameAs": [
           "https://github.com/dlrjsdl200-byte",
@@ -97,8 +104,8 @@
       <em>that pay.</em>
     </h1>
     <p class="hero__desc">
-      One-line x402 payments with ERC-8004 identity.<br/>
-      Pay, prove, reputation — in a single call. USDC on Base.
+      Pay-per-call on-chain data for AI agents, priced in USDC on Base.<br/>
+      Start with <strong>MGO</strong>: live gas comparison across 9 EVM chains from $0.001 per call. No API key, no subscription.
     </p>
 
     <div class="hero__install">
@@ -110,6 +117,7 @@
 
     <div class="hero__actions">
       <a href="#quickstart" class="btn btn--primary">Read quickstart</a>
+      <a href="https://api.mgo.chain-ops.xyz/gas/demo" class="btn btn--ghost" target="_blank" rel="noopener">Try the free demo ↗</a>
       <a href="https://github.com/dlrjsdl200-byte/agent-sdk" class="btn btn--ghost" target="_blank" rel="noopener">GitHub ↗</a>
     </div>
 
@@ -118,7 +126,7 @@
       <span class="hero__proof-dot"></span>
       <span class="hero__proof-item"><strong>ERC-8004</strong> agent identity</span>
       <span class="hero__proof-dot"></span>
-      <span class="hero__proof-item"><strong>43 tests</strong> · MIT licensed</span>
+      <span class="hero__proof-item"><strong>MIT</strong> licensed · OpenAPI 3.1 · MCP</span>
     </div>
   </section>
 
@@ -139,7 +147,7 @@
           Until now, wiring them together meant five manual steps — mint the identity, set up the payment middleware, attach the identity to each request, update reputation after settlement, and check trust before sending money.
         </p>
         <p>
-          <code>@chain-ops/agent-sdk</code> does all of it in <em>one call</em>.
+          <code>@chain-ops/agent-sdk</code> gives you the payment call, the identity registration and the trust lookup in <em>one package</em>. Automatic identity attachment and reputation updates are on the roadmap.
         </p>
       </div>
     </div>
@@ -171,16 +179,16 @@
   tags: [<span class="tok-string">"gas"</span>, <span class="tok-string">"evm"</span>],
 });
 
-<span class="tok-comment">// 3. Pay for any x402 resource — identity attached automatically</span>
+<span class="tok-comment">// 3. Pay for any x402 resource: 402 → sign USDC authorization → retry, handled for you</span>
 <span class="tok-keyword">const</span> { body } = <span class="tok-keyword">await</span> agent.<span class="tok-fn">pay</span>(
   <span class="tok-string">"https://api.mgo.chain-ops.xyz/gas/basic"</span>
 );
-<span class="tok-comment">// → { recommendation: "Use Base — saves 99.8% vs Ethereum" }</span>
+<span class="tok-comment">// → { recommendation: { cheapestChain: "Optimism", action: "Use Optimism — saves ~97% vs Ethereum" } }</span>
 </code></pre>
       </div>
 
       <p class="quickstart__note">
-        ERC-8004 identity attached. EIP-712 signed. Trust checked. One call.
+        x402 V1 + V2. EIP-3009 USDC authorization signed for you. One call, no API key.
         <a href="https://github.com/dlrjsdl200-byte/agent-sdk#readme" target="_blank" rel="noopener">Read the full docs →</a>
       </p>
     </div>
@@ -190,17 +198,17 @@
   <section class="dogfood" id="production">
     <div class="section-inner">
       <p class="section-eyebrow">In production</p>
-      <h2 class="section-title">The SDK dogfoods itself.</h2>
+      <h2 class="section-title">Running in production.</h2>
       <p class="section-subtitle">
-        Our own gas-optimizer API runs on <code>@x402/express</code> and is paid by agents running
-        <code>@chain-ops/agent-sdk</code>. Every call on this site touches Base mainnet.
+        Our own gas-optimizer API, MGO, runs on <code>@x402/express</code> and accepts payments from
+        <code>@chain-ops/agent-sdk</code> or any x402 client. Every paid call settles in USDC on Base mainnet.
       </p>
 
       <div class="dogfood__diagram">
         <div class="dogfood__node dogfood__node--client">
           <span class="dogfood__node-label">Client</span>
           <code class="dogfood__node-title">@chain-ops/agent-sdk</code>
-          <p class="dogfood__node-desc">Signs EIP-712, attaches ERC-8004 identity, calls <code>agent.pay()</code></p>
+          <p class="dogfood__node-desc">Reads the 402, signs the USDC authorization, retries: <code>agent.pay()</code></p>
         </div>
 
         <div class="dogfood__arrow">
@@ -227,30 +235,36 @@
           Compare real-time gas prices across 9 EVM chains. $0.001 per call basic, $0.002 premium
           (adds BNB, Polygon, Avalanche, zkSync, Hyperliquid).
         </p>
-        <div class="dogfood__product-stats" id="live-stats">
+        <div class="dogfood__product-stats">
           <div class="dogfood__stat">
-            <span class="dogfood__stat-value" id="stats-calls">—</span>
-            <span class="dogfood__stat-label">calls</span>
+            <span class="dogfood__stat-value">9</span>
+            <span class="dogfood__stat-label">EVM chains</span>
           </div>
           <div class="dogfood__stat">
-            <span class="dogfood__stat-value" id="stats-revenue">—</span>
-            <span class="dogfood__stat-label">revenue</span>
+            <span class="dogfood__stat-value">$0.001</span>
+            <span class="dogfood__stat-label">per call</span>
           </div>
           <div class="dogfood__stat">
-            <span class="dogfood__stat-value" id="stats-last">—</span>
-            <span class="dogfood__stat-label">last payment</span>
+            <span class="dogfood__stat-value">x402 V2</span>
+            <span class="dogfood__stat-label">USDC on Base</span>
+          </div>
+          <div class="dogfood__stat">
+            <span class="dogfood__stat-value">MCP</span>
+            <span class="dogfood__stat-label">remote server</span>
           </div>
         </div>
         <div class="dogfood__product-links">
           <a href="https://mgo.chain-ops.xyz" class="btn btn--ghost btn--sm" target="_blank" rel="noopener">Dashboard ↗</a>
           <a href="https://api.mgo.chain-ops.xyz/gas/demo" class="btn btn--ghost btn--sm" target="_blank" rel="noopener">Try free API ↗</a>
+          <a href="https://api.mgo.chain-ops.xyz/llms.txt" class="btn btn--ghost btn--sm" target="_blank" rel="noopener">API docs ↗</a>
           <a href="https://github.com/dlrjsdl200-byte/x402-gas-api" class="btn btn--ghost btn--sm" target="_blank" rel="noopener">Source ↗</a>
         </div>
       </div>
 
       <p class="dogfood__pipeline">
-        In the pipeline: <span>HyperPulse</span> (Hyperliquid intelligence),
-        <span>Insider Scanner</span> (Polymarket detection). Both in private development.
+        Also from chain-ops: <a href="https://x402.chain-ops.xyz" target="_blank" rel="noopener"><span>x402Hub</span></a> (trust board for x402 services, live),
+        <a href="https://hyperpulse-web.vercel.app" target="_blank" rel="noopener"><span>HyperPulse</span></a> (Hyperliquid perp intelligence, live),
+        <span>Insider Scanner</span> (Polymarket detection, paused).
       </p>
     </div>
   </section>
@@ -281,6 +295,8 @@
           <a href="https://mgo.chain-ops.xyz" class="footer__link" target="_blank" rel="noopener">MGO</a>
           <a href="https://www.npmjs.com/package/chain-ops-mgo" class="footer__link" target="_blank" rel="noopener">chain-ops-mgo</a>
           <a href="https://api.mgo.chain-ops.xyz/llms.txt" class="footer__link" target="_blank" rel="noopener">llms.txt</a>
+          <a href="https://x402.chain-ops.xyz" class="footer__link" target="_blank" rel="noopener">x402Hub</a>
+          <a href="https://hyperpulse-web.vercel.app" class="footer__link" target="_blank" rel="noopener">HyperPulse</a>
         </div>
         <div class="footer__col">
           <h4 class="footer__col-title">Protocol</h4>
